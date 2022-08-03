@@ -1,18 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+
+import { Subscription } from 'rxjs';
+
 import { Product } from 'src/app/models/product';
-import { OrderDetailsService } from 'src/app/services/order-details.service';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
-
-  constructor(private service: OrderDetailsService) { }
+export class HomeComponent implements OnInit, OnDestroy {
   houses: Product[] = [];
+
+  private subscriptions: Subscription[] = [];
+
+  constructor(private ps: ProductService) { }
+
   ngOnInit(): void {
-    this.houses = this.service.houses;
+    const sub = this.ps.getProducts()
+      .subscribe(data => {
+        this.houses = data;
+      });
+    this.subscriptions.push(sub);
+  }
+
+  ngOnDestroy(): void {
+    for (const sub of this.subscriptions) {
+      sub.unsubscribe();
+    }
   }
 
 }

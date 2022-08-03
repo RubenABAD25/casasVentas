@@ -18,6 +18,7 @@ import { MenupageComponent } from './pages/menupage/menupage.component';
 
 import { environment } from '../environments/environment';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage())
   ],
-  providers: [],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
