@@ -17,6 +17,7 @@ import { FooterComponent } from './sharepage/footer/footer.component';
 import { MenupageComponent } from './pages/menupage/menupage.component';
 
 import { environment } from '../environments/environment';
+import { ProductCardComponent } from './components/product-card/product-card.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { environment } from '../environments/environment';
     MenuComponent,
     AboutComponent,
     ContactComponent,
-    MenupageComponent
+    MenupageComponent,
+    ProductCardComponent
   ],
   imports: [
     BrowserModule,

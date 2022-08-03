@@ -1,28 +1,21 @@
 <div class="banner">
-    <div class="content">
-        <h1 class="mb-5">La mejor inversión es tu hogar</h1>
-        <a routerLink="menu">Llama ya <i class="bi bi-arrow-right"></i></a>
-    </div>
+  <div class="content">
+    <h1 class="mb-5">La mejor inversión es tu hogar</h1>
+    <a routerLink="menu">Llama ya <i class="bi bi-arrow-right"></i></a>
+  </div>
 </div>
 <!-- step  -->
 
 
 <!-- foodbox  -->
 <div class="container mt-4 mb-4">
-    <h1 class="text-center">Catalogo de Casas <span class="highlight">Para los Clientes</span></h1>
-    <div class="row">
-        <div class="col-lg-4" *ngFor="let fd of foodData">
+  <h1 class="text-center">Catalogo de Casas <span class="highlight">Para los Clientes</span></h1>
+  <div class="row">
+    <div class="col-lg-4" *ngFor="let house of houses">
 
-            <div class="foodbox mt-3 mb-3">
-                <img src="{{fd.foodImg}}">
-                <h1>{{fd.foodName}}</h1>
-                <p>{{fd.foodDetails}}</p>
-                <p>{{fd.foodPrice | currency:'INR'}}</p>
-                <br/>
-                <a class="buybtn" [routerLink]="['/menu',fd.id]">Ver mas <i class="bi bi-eye-fill"></i></a>
-            </div>
+      <app-product-card [product]="house"></app-product-card>
 
-        </div>
     </div>
-    <a routerLink="menu" class="viewmorebtn">Listado <i class="bi bi-arrow-right"></i></a>
+  </div>
+  <a routerLink="menu" class="viewmorebtn">Listado <i class="bi bi-arrow-right"></i></a>
 </div>

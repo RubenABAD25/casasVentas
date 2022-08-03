@@ -9,22 +9,21 @@ import { OrderDetailsService } from 'src/app/services/order-details.service';
 })
 export class MenupageComponent implements OnInit {
 
-  constructor(private param:ActivatedRoute,private service:OrderDetailsService) { }
-  getMenuId:any;
-  menuData:any;
+  constructor(private param: ActivatedRoute, private service: OrderDetailsService) { }
+  id: any;
+  menuData: any;
 
   ngOnInit(): void {
-    this.getMenuId = this.param.snapshot.paramMap.get('id');
-    console.log(this.getMenuId,'getmenu');
-    if(this.getMenuId)
-    {
-      this.menuData =  this.service.foodDetails.filter((value)=>{
-          return value.id == this.getMenuId;
-        });
-        console.log(this.menuData,'menudata>>');
-        
+    this.id = this.param.snapshot.paramMap.get('id');
+    console.log(this.id, 'getmenu');
+    if (this.id) {
+      this.menuData = this.service.houses.filter((house) => {
+        return house.id == this.id;
+      });
+      console.log(this.menuData, 'menudata>>');
+
     }
-    
+
   }
 
 }
