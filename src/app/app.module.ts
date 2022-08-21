@@ -30,7 +30,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     AboutComponent,
     ContactComponent,
     MenupageComponent,
-    ProductCardComponent
+    ProductCardComponent,
   ],
   imports: [
     BrowserModule,

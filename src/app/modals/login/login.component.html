@@ -1,0 +1,54 @@
+<div class="modal-header">
+  <h4 class="modal-title"></h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="dismiss()">
+  </button>
+</div>
+
+<div class="modal-body text-center">
+
+  <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <h1 class="h3 mb-3 fw-normal">Iniciar sesion</h1>
+
+    <div>
+        <small *ngIf="isInValid('email')" class="form-text text-danger">Correo</small>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fas fa-at"></i></span>
+            <input type="email" class="form-control" id="txtEmail"
+                placeholder="Correo" formControlName="email"
+                [class.is-invalid]="isInValid('email')" [class.is-valid]="isValid('email')">
+        </div>
+    </div>
+
+    <div>
+        <small *ngIf="isInValid('password')" class="form-text text-danger">Contraseña</small>
+        <div class="input-group mb-3">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input type="password" class="form-control" id="txtPass"
+                placeholder="Contraseña" formControlName="password"
+                [class.is-invalid]="isInValid('password')" [class.is-valid]="isValid('password')">
+        </div>
+    </div>
+
+    <!-- <div class="checkbox mt-2">
+        <label>
+            <input type="checkbox" formControlName="remember"> Recordarme
+        </label>
+    </div> -->
+
+    <!-- <div class="mt-3 mb-3">
+        <a class="text-muted" routerLink="/auth/reset">¿Olvido su contrase&ntilde;a?</a>
+    </div> -->
+
+    <button class="w-100 btn btn-primary" [disabled]="loading" type="submit">
+        <span *ngIf="loading" class="spinner-border spinner-border-sm"></span>
+        Iniciar sesion
+    </button>
+    <!-- <p class="mt-3 mb-3 text-muted">¿No tienes una cuenta? <a [routerLink]="['/auth/signup']">Registrate</a></p> -->
+</form>
+
+</div>
+
+<!-- <div class="modal-footer">
+  <button class="btn btn-primary" (click)="close(true)" type="button">Aceptar</button>
+  <button ngbAutofocus type="button" class="btn btn-danger" (click)="close(false)">Cancelar</button>
+</div> -->
