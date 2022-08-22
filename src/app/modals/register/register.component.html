@@ -6,13 +6,39 @@
 
 <div class="modal-body text-center">
 
-<form>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <div class="input-group mb-3">
+      <input type="file" accept="image/png, image/jpeg, image/webp" class="form-control" formControlName="image"
+        [class.is-invalid]="isInValid('image')" [class.is-valid]="isValid('image')" (change)="loadFile($event)">
+    </div>
 
-</form>
+    <div class="input-group mb-3">
+      <!-- <span class="input-group-text"><i class="fas fa-lock"></i></span> -->
+      <input type="text" class="form-control" id="txtPass" placeholder="Titulo" formControlName="title"
+        [class.is-invalid]="isInValid('title')" [class.is-valid]="isValid('title')">
+    </div>
 
-</div>
+    <div class="mb-3">
+      <!-- <label for="description" class="form-label">Descripcion</label> -->
+      <textarea class="form-control" [class.is-invalid]="isInValid('description')"
+        [class.is-valid]="isValid('description')" placeholder="Descripcion" id="description" rows="3"
+        formControlName="description" #description></textarea>
+      <small>{{description.value.length}}/1000 caracteres</small>
+    </div>
 
-<div class="modal-footer">
-  <button class="btn btn-primary" (click)="close(true)" type="button">Aceptar</button>
-  <button ngbAutofocus type="button" class="btn btn-danger" (click)="close(false)">Cancelar</button>
+    <div class="mb-3">
+      <!-- <label for="price" class="form-label">Precio</label> -->
+      <div class="input-group">
+        <span class="input-group-text">$</span>
+        <input type="number" class="form-control" [class.is-invalid]="isInValid('price')"
+          [class.is-valid]="isValid('price')" id="price" formControlName="price">
+      </div>
+    </div>
+
+    <div class="modal-footer">
+      <button class="btn btn-primary" type="submit">Aceptar</button>
+      <button ngbAutofocus type="button" class="btn btn-danger" (click)="close(false)">Cancelar</button>
+    </div>
+  </form>
+
 </div>

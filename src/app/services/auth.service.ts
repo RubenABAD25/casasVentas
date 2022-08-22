@@ -34,7 +34,6 @@ export class AuthService {
 
           if (data?.claims != null) {
             const claims = data.claims;
-            console.log(data);
             if (claims.hasOwnProperty('roles')) {
               const roles = claims['roles'];
 

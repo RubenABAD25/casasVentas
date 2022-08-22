@@ -32,7 +32,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
           this.as.hasRoles(['admin'])
             .then(res => {
-              console.log(res);
               this.isAdmin = res;
             })
             .catch(e => console.error(e))
@@ -53,7 +52,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   register() {
-    const modal = this.modalService.open(RegisterComponent, { size: 'xl' });
+    const modal = this.modalService.open(RegisterComponent, { size: 'md' });
     modal.result
       .then(confirm => {
         console.log('Confirm:', confirm);
