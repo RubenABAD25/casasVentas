@@ -46,8 +46,9 @@ export class LoginComponent {
     const password = this.loginForm.getRawValue().password;
 
     this.as.login(email, password)
-    .then(() => {
+    .then(user => {
       this.loading = false;
+      console.log(user.user);
       this.close(true);
     })
     .catch(error => {

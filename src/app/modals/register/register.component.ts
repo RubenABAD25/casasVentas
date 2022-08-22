@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
@@ -11,9 +12,17 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent{
+export class RegisterComponent {
 
-  constructor(private modal: NgbActiveModal) { }
+  public registerForm = this.formBuilder.nonNullable.group({
+    email: ['', [Validators.required, Validators.pattern("[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$")]],
+    password: ['', Validators.required],
+  });
+
+  constructor(
+    private modal: NgbActiveModal,
+    private formBuilder: FormBuilder,
+  ) { }
 
   // public isInValid(input: string) {
   //   return this.loginForm.get(input)?.invalid && this.loginForm.get(input)?.touched;

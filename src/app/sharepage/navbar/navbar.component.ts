@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { LoginComponent } from 'src/app/modals/login/login.component';
+import { RegisterComponent } from 'src/app/modals/register/register.component';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -11,6 +12,7 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
+  public isAdmin: boolean = false;
   public isLoggedIn: boolean = false;
   private subscriptions: Subscription[] = [];
 
@@ -27,11 +29,21 @@ export class NavbarComponent implements OnInit, OnDestroy {
             this.isLoggedIn = true;
           else
             this.isLoggedIn = false;
+
+          this.as.hasRoles(['admin'])
+            .then(res => {
+              console.log(res);
+              this.isAdmin = res;
+            })
+            .catch(e => console.error(e))
+
         },
         error: e => console.error(e),
         complete: () => console.info("Comprobacion de autenticacion completada")
       });
     this.subscriptions.push(sub);
+
+
   }
 
   ngOnDestroy(): void {
@@ -40,14 +52,23 @@ export class NavbarComponent implements OnInit, OnDestroy {
     }
   }
 
+  register() {
+    const modal = this.modalService.open(RegisterComponent, { size: 'xl' });
+    modal.result
+      .then(confirm => {
+        console.log('Confirm:', confirm);
+      })
+      .catch(e => console.error(e))
+  }
+
   login() {
     const modal = this.modalService.open(LoginComponent);
     modal.result.then(confirm => {
-      console.log('Detele:', confirm);
+      console.log('Confirm:', confirm);
       // if (confirm)
       //   this.eliminarProducto();
     })
-      .catch(console.error);
+      .catch(e => console.error(e));
   }
 
   logout() {

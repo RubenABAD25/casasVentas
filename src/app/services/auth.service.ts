@@ -29,13 +29,12 @@ export class AuthService {
     await this.currentUser()
       .then(
         async user => {
-
           const idTokenResult = await user?.getIdTokenResult();
           const data = idTokenResult;
 
           if (data?.claims != null) {
             const claims = data.claims;
-
+            console.log(data);
             if (claims.hasOwnProperty('roles')) {
               const roles = claims['roles'];
 
