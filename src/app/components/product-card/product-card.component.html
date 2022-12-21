@@ -1,6 +1,6 @@
 <div class="foodbox mt-3 mb-3">
   <div class="product-detail">
-    <swiper [slidesPerView]="1">
+    <swiper [config]="config" #swiperSlideShow>
       <ng-template swiperSlide *ngFor="let img of product.images">
         <img [src]="img" [alt]="product.title">
       </ng-template>
