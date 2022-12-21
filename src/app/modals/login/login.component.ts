@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth.service';
     CommonModule,
     ReactiveFormsModule,
   ],
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
 

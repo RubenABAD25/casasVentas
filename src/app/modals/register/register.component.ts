@@ -13,13 +13,13 @@ import { ProductService } from 'src/app/services/product.service';
     ReactiveFormsModule
   ],
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
 
-  private file!: File;
+  private files!: File[];
 
-  public img: string = '';
+  public images: string[] = [];
 
   public registerForm = this.formBuilder.nonNullable.group({
     image: ['', Validators.required],
@@ -48,15 +48,15 @@ export class RegisterComponent {
     const description = this.registerForm.getRawValue().description;
     const price = this.registerForm.getRawValue().price;
 
-    console.log(this.file, title, description, price);
+    console.log(this.files, title, description, price);
 
-    const product:Product={
+    const product: Product = {
       title: title,
       price: price,
       description: description,
     };
 
-    this.ps.create(product, this.file)
+    this.ps.create(product, this.files)
     .then(res=>{
       this.close(true);
       alert('Vivienda registrada');
@@ -65,14 +65,16 @@ export class RegisterComponent {
   }
 
   public loadFile(event: any) {
-    this.file = <File>event.target.files[0];
-    let reader = new FileReader();
-    reader.readAsDataURL(this.file);
-    reader.onload = () => {
-      const src = reader.result;
-      if (typeof src == 'string') {
-        this.img = src;
-        console.log(src);
+    this.files = <File[]>event.target.files;
+    for (const file of this.files) {
+      let reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        const src = reader.result;
+        if (typeof src == 'string') {
+          this.images.push(src);
+          console.log(src);
+        }
       }
     }
   }

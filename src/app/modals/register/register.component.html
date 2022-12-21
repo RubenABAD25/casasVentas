@@ -9,7 +9,7 @@
   <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
     <div class="input-group mb-3">
       <input type="file" accept="image/png, image/jpeg, image/webp" class="form-control" formControlName="image"
-        [class.is-invalid]="isInValid('image')" [class.is-valid]="isValid('image')" (change)="loadFile($event)">
+        [class.is-invalid]="isInValid('image')" [class.is-valid]="isValid('image')" (change)="loadFile($event)" multiple>
     </div>
 
     <div class="input-group mb-3">

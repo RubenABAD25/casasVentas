@@ -15,9 +15,12 @@ export class ProductService {
 
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage) { }
 
-  public async create(product: Product, file: File) {
+  public async create(product: Product, files: File[]) {
     const docId = this.afs.createId();
-    product.imageUrl = await (await this.uploadImage(docId, file)).ref.getDownloadURL();
+
+    product.images = await this.uploadAllImages(docId, files);
+
+    // product.imageUrl = await (await this.uploadImage(docId, file)).ref.getDownloadURL();
     return this.afs.
       collection<Product>('products')
       .doc(docId)
@@ -48,6 +51,15 @@ export class ProductService {
 
   public obtenerNombreImagen(imgUrl: string): string {
     return imgUrl.substring(imgUrl.lastIndexOf('%2F') + 3, imgUrl.lastIndexOf('?alt'));
+  }
+
+  private async uploadAllImages(id: string, imagenes: File[]) {
+    const urls: string[] = [];
+    for (const img of imagenes) {
+      const response = await this.uploadImage(id, img);
+      urls.push(await response.ref.getDownloadURL());
+    }
+    return urls;
   }
 
   private uploadImage(id: string, img: File) {
