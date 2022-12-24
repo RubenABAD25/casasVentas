@@ -20,6 +20,7 @@ import { MenupageComponent } from './pages/menupage/menupage.component';
 import { environment } from '../environments/environment';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     ContactComponent,
     MenupageComponent,
     ProductCardComponent,
+    ProductDetailComponent,
   ],
   imports: [
     BrowserModule,

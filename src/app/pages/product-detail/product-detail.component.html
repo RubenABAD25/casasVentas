@@ -1,0 +1,10 @@
+<div *ngIf="product">
+  <swiper [config]="config" #swiperSlideShow>
+    <ng-template swiperSlide *ngFor="let img of product.images">
+      <a [routerLink]="['/house', product.id]" [state]="{data:product}">
+        <img width="512px" [src]="img" [alt]="product.title">
+      </a>
+    </ng-template>
+  </swiper>
+  <p>{{product.title}}</p>
+</div>

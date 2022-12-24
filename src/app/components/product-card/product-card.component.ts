@@ -28,7 +28,7 @@ export class ProductCardComponent implements AfterViewInit {
       // navigation: true,
       autoplay: {
         delay: 3000,
-        disableOnInteraction: false
+        disableOnInteraction: true
       },
       // pagination: { clickable: true },
       // scrollbar: { draggable: true },

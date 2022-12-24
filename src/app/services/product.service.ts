@@ -27,6 +27,23 @@ export class ProductService {
       .set(product);
   }
 
+  public getProduct(uid: string) {
+    return this.afs
+      .collection<Product>('products')
+      .doc(uid)
+      .snapshotChanges()
+      .pipe(
+        map(doc => {
+          if (doc) {
+            const product = doc.payload.data();
+            product!.id = doc.payload.id;
+            return product;
+          }
+          return null;
+        })
+      );
+  }
+
   public getProducts() {
     return this.afs
       .collection<Product>('products')
